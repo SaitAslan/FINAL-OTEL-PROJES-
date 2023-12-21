@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
-using Otelyeniden.Entity;
+
+using Otelyeniden.Entityy;
 using Otelyeniden.Repositories;
 using System;
 using System.Collections.Generic;
@@ -19,13 +20,13 @@ namespace Otelyeniden.Formlar.Personel
         {
             InitializeComponent();
         }
-        DbOtelYeniEntities db=new DbOtelYeniEntities();
+        DbOtelYeniEntities2 db=new DbOtelYeniEntities2();
 
        public int id;
         Repository<TblPersonel> repo = new Repository<TblPersonel>();
         private void FrmPersonelKarti_Load(object sender, EventArgs e)
         {
-            this.Text = id.ToString();
+            //this.Text = id.ToString();
 
             if (id != 0)
             {

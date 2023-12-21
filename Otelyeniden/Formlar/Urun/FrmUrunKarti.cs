@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
-using Otelyeniden.Entity;
+
+using Otelyeniden.Entityy;
 using Otelyeniden.Repositories;
 using System;
 using System.Collections.Generic;
@@ -19,18 +20,12 @@ namespace Otelyeniden.Formlar.Urun
         {
             InitializeComponent();
         }
-        DbOtelYeniEntities db = new DbOtelYeniEntities();
+        DbOtelYeniEntities2 db = new DbOtelYeniEntities2();
         Repository<TblUrun> repo = new Repository<TblUrun>();
         TblUrun t = new TblUrun();
         public int id;
         private void FrmUrunKarti_Load(object sender, EventArgs e)
         {
-            
-
-
-
-
-
             //Ürün Grup Listesi
 
             lookUpEditUrunGrup.Properties.DataSource = (from x in db.TblUrunGrup
@@ -104,6 +99,26 @@ namespace Otelyeniden.Formlar.Urun
             urundeger.Kdv=byte.Parse(TxtKdv.Text);
             repo.TUpdate(urundeger);
             XtraMessageBox.Show("Ürün başarılı bir şekilde güncellendi");
+        }
+
+        private void Rdb1_CheckedChanged(object sender, EventArgs e)
+        {
+            TxtKdv.Text = "1";
+        }
+
+        private void Rdb8_CheckedChanged(object sender, EventArgs e)
+        {
+            TxtKdv.Text = "8";
+        }
+
+        private void Rdb10_CheckedChanged(object sender, EventArgs e)
+        {
+            TxtKdv.Text = "10";
+        }
+
+        private void Rdb18_CheckedChanged(object sender, EventArgs e)
+        {
+            TxtKdv.Text = "18";
         }
     }
 }

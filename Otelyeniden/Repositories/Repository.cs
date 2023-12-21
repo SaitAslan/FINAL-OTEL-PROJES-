@@ -1,4 +1,5 @@
-﻿using Otelyeniden.Entity;
+﻿
+using Otelyeniden.Entityy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Otelyeniden.Repositories
 {
     public class Repository<T> where T : class,new()
     {
-        DbOtelYeniEntities db = new DbOtelYeniEntities();
+        DbOtelYeniEntities2 db = new DbOtelYeniEntities2();
         public List<T> GetAll()
         {
             return db.Set<T>().ToList();

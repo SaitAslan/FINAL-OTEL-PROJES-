@@ -1,4 +1,5 @@
-﻿using Otelyeniden.Entity;
+﻿
+using Otelyeniden.Entityy;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,7 @@ namespace Otelyeniden.Formlar.Personel
         {
             InitializeComponent();
         }
-        DbOtelYeniEntities db = new DbOtelYeniEntities();
+        DbOtelYeniEntities2 db = new DbOtelYeniEntities2();
         private void FrmPersonelListesi_Load(object sender, EventArgs e)
         {
             gridControl1.DataSource = (from x in db.TblPersonel

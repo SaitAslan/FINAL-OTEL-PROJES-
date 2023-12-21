@@ -1,5 +1,5 @@
 ﻿using DevExpress.XtraEditors;
-using Otelyeniden.Entity;
+using Otelyeniden.Entityy;
 using Otelyeniden.Repositories;
 using System;
 using System.Collections.Generic;
@@ -19,49 +19,58 @@ namespace Otelyeniden.Formlar.Misafir
         {
             InitializeComponent();
         }
-        DbOtelYeniEntities db = new DbOtelYeniEntities();
+        DbOtelYeniEntities2 db = new DbOtelYeniEntities2();
         Repository<TblMisafir> repo = new Repository<TblMisafir>();
         TblMisafir t = new TblMisafir();
         public int id;
         string resim1, resim2;
         private void FrmMisafirKarti_Load(object sender, EventArgs e)
         {
-
-            //Güncellenecek kart bilgileri
-            if (id != 0)
+            try
             {
-                var misafir = repo.Find(x => x.MisafirId == id);
-                TxtAdSoyad.Text = misafir.AdSoyad;
-                TxtTc.Text = misafir.Tc;
-                TxtAdres.Text = misafir.Adres;
-                TxtTelefon.Text = misafir.Telefon;
-                TxtMail.Text = misafir.Mail;
-                TxtAciklama.Text = misafir.Aciklama;
-                PictureEditKimlikOn.Image = Image.FromFile(misafir.KimlikFoto1);
-                PictureEditKimlikArka.Image = Image.FromFile(misafir.KimlikFoto2);
-                resim1 = misafir.KimlikFoto1;
-                resim2= misafir.KimlikFoto2;
-               lookUpEditSehir.EditValue = misafir.sehir;
-               lookUpEditUlke.EditValue = misafir.Ülke;
-               lookUpEditIlce.EditValue = misafir.ilce;
+                if (id != 0)
+                {
+                    var misafir = repo.Find(x => x.MisafirId == id);
+                    TxtAdSoyad.Text = misafir.AdSoyad;
+                    TxtTc.Text = misafir.Tc;
+                    TxtAdres.Text = misafir.Adres;
+                    TxtTelefon.Text = misafir.Telefon;
+                    TxtMail.Text = misafir.Mail;
+                    TxtAciklama.Text = misafir.Aciklama;
+                    lookUpEditSehir.EditValue = misafir.sehir;
+                    lookUpEditUlke.EditValue = misafir.Ülke;
+                    lookUpEditIlce.EditValue = misafir.ilce;
+                    PictureEditKimlikOn.Image = Image.FromFile(misafir.KimlikFoto1);
+                    PictureEditKimlikArka.Image = Image.FromFile(misafir.KimlikFoto2);
+                    resim1 = misafir.KimlikFoto1;
+                    resim2 = misafir.KimlikFoto2;
+                }
 
             }
+            catch (Exception)
+            {
+
+                XtraMessageBox.Show("Bir Hata Oluştu Lütfen sütünları kontrol edin","Hata",MessageBoxButtons.OK,
+                    MessageBoxIcon.Stop);
+            }
+            //Güncellenecek kart bilgileri
 
             //Ülke Listesi
 
             lookUpEditUlke.Properties.DataSource = (from x in db.TblUlke
-                                                         select new
-                                                         {
-                                                             x.UlkeId,
-                                                             x.UlkeAd
-                                                         }).ToList();
-            //Şehir Listesi
-            lookUpEditSehir.Properties.DataSource = (from x in db.iller
                                                     select new
                                                     {
-                                                    Id=    x.id,
-                                                      Şehir=  x.sehir
+                                                        x.UlkeId,
+                                                        x.UlkeAd
                                                     }).ToList();
+            //Şehir Listesi
+            lookUpEditSehir.Properties.DataSource = (from x in db.iller
+                                                     select new
+                                                     {
+                                                         Id = x.id,
+                                                         Şehir = x.sehir
+                                                     }).ToList();
+
 
         }
 
@@ -112,23 +121,30 @@ namespace Otelyeniden.Formlar.Misafir
 
         private void BtnKaydet_Click(object sender, EventArgs e)
         {
+            if (PictureEditKimlikArka.Image !=null && PictureEditKimlikOn.Image !=null) 
+            {
+                t.AdSoyad = TxtAdSoyad.Text;
+                t.Tc = TxtTc.Text;
+                t.Telefon = TxtTelefon.Text;
+                t.Mail = TxtMail.Text;
+                t.Adres = TxtAdres.Text;
+                t.Aciklama = TxtAciklama.Text;
+                t.Durum = 1;
+                t.sehir = int.Parse(lookUpEditSehir.EditValue.ToString());
+                t.ilce = int.Parse(lookUpEditIlce.EditValue.ToString());
+                t.Ülke = int.Parse(lookUpEditUlke.EditValue.ToString());
+                t.KimlikFoto1 = resim1;
+                t.KimlikFoto2 = resim2;
+                repo.TAdd(t);
+                XtraMessageBox.Show("Misafir sisteme başarılı bir şekilde kaydedildi", "Bilgi", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            else
+            {
+                XtraMessageBox.Show("Lütfen Bilgileri Eksiksiz Doldurunuz.", "Bilgi", MessageBoxButtons.OK,
+                   MessageBoxIcon.Stop);
+            }
             
-            t.AdSoyad=TxtAdSoyad.Text;
-            t.Tc=TxtTc.Text;
-            t.Telefon=TxtTelefon.Text;
-            t.Mail=TxtMail.Text;
-            t.Adres=TxtAdres.Text;
-            t.Aciklama=TxtAciklama.Text;
-            t.Durum = 1;
-            t.sehir = int.Parse(lookUpEditSehir.EditValue.ToString());
-            t.ilce=int.Parse(lookUpEditIlce.EditValue.ToString());
-            t.Ülke=int.Parse(lookUpEditUlke.EditValue.ToString());
-            t.KimlikFoto1 = resim1;
-            t.KimlikFoto2 = resim2;
-            
-            repo.TAdd(t);
-            XtraMessageBox.Show("Misafir sisteme başarılı bir şekilde kaydedildi", "Bilgi", MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
             
         }
     }

@@ -1,4 +1,5 @@
-﻿using Otelyeniden.Entity;
+﻿
+using Otelyeniden.Entityy;
 using Otelyeniden.Formlar.Personel;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Otelyeniden.Formlar.Misafir
         {
             InitializeComponent();
         }
-        DbOtelYeniEntities db = new DbOtelYeniEntities();
+        DbOtelYeniEntities2 db = new DbOtelYeniEntities2();
         private void FrmMisafirListesi_Load(object sender, EventArgs e)
         {
             gridControl1.DataSource=(from x in db.TblMisafir

@@ -1,5 +1,5 @@
 ﻿using DevExpress.XtraEditors;
-using Otelyeniden.Entity;
+using Otelyeniden.Entityy;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +19,7 @@ namespace Otelyeniden.Formlar.Tanımlamalar
         {
             InitializeComponent();
         }
-        DbOtelYeniEntities db = new DbOtelYeniEntities();
+        DbOtelYeniEntities2 db = new DbOtelYeniEntities2();
         private void FrmGorev_Load(object sender, EventArgs e)
         {
             db.TblGorev.Load();

@@ -1,4 +1,5 @@
-﻿using Otelyeniden.Entity;
+﻿
+using Otelyeniden.Entityy;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,7 @@ namespace Otelyeniden.Formlar.Urun
         {
             InitializeComponent();
         }
-        DbOtelYeniEntities db = new DbOtelYeniEntities();
+        DbOtelYeniEntities2 db = new DbOtelYeniEntities2();
         private void FrmUrunGirisHareketleri_Load(object sender, EventArgs e)
         {
             gridControl1.DataSource=(from x in db.TblUrunHareket
@@ -29,6 +30,13 @@ namespace Otelyeniden.Formlar.Urun
                                          x.Tarih,
                                          x.HareketTuru
                                      }).Where(y=>y.HareketTuru=="Giriş").ToList();
+        }
+
+        private void gridView1_DoubleClick(object sender, EventArgs e)
+        {
+            FrmUrunHareketTanimi fr=new FrmUrunHareketTanimi();
+            fr.id=int.Parse(gridView1.GetFocusedRowCellValue("Hareketid").ToString());
+            fr.Show();
         }
     }
 }

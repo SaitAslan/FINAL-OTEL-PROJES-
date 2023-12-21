@@ -9,7 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using Otelyeniden.Entity;
+
+using Otelyeniden.Entityy;
 
 namespace Otelyeniden.Formlar.Tanımlamalar
 {
@@ -19,7 +20,7 @@ namespace Otelyeniden.Formlar.Tanımlamalar
         {
             InitializeComponent();
         }
-        DbOtelYeniEntities db =new DbOtelYeniEntities();
+        DbOtelYeniEntities2 db =new DbOtelYeniEntities2();
 
         private void FrmDurum_Load(object sender, EventArgs e)
         {

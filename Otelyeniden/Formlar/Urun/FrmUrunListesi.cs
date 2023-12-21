@@ -1,4 +1,5 @@
-﻿using Otelyeniden.Entity;
+﻿
+using Otelyeniden.Entityy;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,8 +19,8 @@ namespace Otelyeniden.Formlar.Urun
             InitializeComponent();
         }
 
-        DbOtelYeniEntities db = new DbOtelYeniEntities();
-    private void FrmUrunListesi_Load(object sender, EventArgs e)
+        DbOtelYeniEntities2 db = new DbOtelYeniEntities2();
+        private void FrmUrunListesi_Load(object sender, EventArgs e)
         {
             gridControl1.DataSource=(from x in db.TblUrun
                                      select new
